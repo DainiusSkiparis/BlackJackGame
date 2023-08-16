@@ -1,5 +1,8 @@
 import random
 
+dylerio_kortos = []
+zaidejo_kortos = []
+
 
 class Korta:
     def __init__(self, simbolis, reiksme):
@@ -13,8 +16,8 @@ class KortuKalade:
     def __init__(self):
         self.simboliai = ['♠', '♥', '♦', '♣']
         self.reiksmes = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-        # testas self.simboliai = ['♠']
-        # testas self.reiksmes = ['J', 'Q']
+        # self.simboliai = ['♠']
+        # self.reiksmes = ['K', 'A']
         # self.kalade = [Korta(simbolis, reiksme) for simbolis in self.simboliai for reiksme in self.reiksmes]
 
         self.kaladziu_kiekis = 6  # Nurodome, kiek kaladžių norime sukurti
@@ -23,14 +26,8 @@ class KortuKalade:
 
         random.shuffle(self.kalade)
 
-    def trauktikorta(self):
-        if len(self.kalade) > 0:
-            return self.kalade.pop()
-        else:
-            print("Kaladė tuščia!")
 
-
-# Sukuriamas kortų kaladės objektas
+# Sukuriamas kortu kalades objektas
 kalade = KortuKalade()
 
 
@@ -39,6 +36,7 @@ def zaidejokortos(kortos):
     for korta in kortos:
         print(f"{korta.reiksme}{korta.simbolis}", end=' ')
     print()
+
 
 def dyleriokortos(kortos):
     print("\nDylerio kortos:", end=' ')

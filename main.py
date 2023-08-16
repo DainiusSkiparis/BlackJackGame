@@ -1,66 +1,29 @@
-import random
+from kortos import *
+from pasirinkimai import pasirinkimas
+from skaiciavimai import taskuskaiciavimas, tuzuskaiciavimas
 
-from kortos import kalade, zaidejokortos, dyleriokortos
+tasku_suma = 0
+tuzu_kiekis = 0
 
-dylerio_suma = 0
-zaidejo_suma = 0
-
-dylerio_kortos = []
-zaidejo_kortos = []
-
-for _ in range(2):
-    # korta = kalade.trauktikorta()
+for _ in range(2):  # Padalinam po 2 kortas
     dylerio_korta = random.choice(kalade.kalade)
     zaidejo_korta = random.choice(kalade.kalade)
-    dylerio_suma += dylerio_korta.reiksmes_verte[dylerio_korta.reiksme]
-    zaidejo_suma += zaidejo_korta.reiksmes_verte[zaidejo_korta.reiksme]
+
     dylerio_kortos.append(dylerio_korta)
     zaidejo_kortos.append(zaidejo_korta)
 
 dyleriokortos(dylerio_kortos)
+dylerio_tuzai = tuzuskaiciavimas(dylerio_kortos, tuzu_kiekis)
+print(f"Tuzu: {dylerio_tuzai}")
+
+dylerio_tasku_suma = taskuskaiciavimas(dylerio_kortos, tasku_suma, dylerio_tuzai)
+print(f"Tasku suma: {dylerio_tasku_suma}")
+
 zaidejokortos(zaidejo_kortos)
+zaidejo_tuzai = tuzuskaiciavimas(zaidejo_kortos, tuzu_kiekis)
+print(f"Tuzu: {zaidejo_tuzai}")
 
-print(f"Tavo suma: {zaidejo_suma}\n")
+zaidejo_tasku_suma = taskuskaiciavimas(zaidejo_kortos, tasku_suma, zaidejo_tuzai)
+print(f"Tasku suma: {zaidejo_tasku_suma}")
 
-while True:
-    print("+--------------------+")
-    print("| 1 - Imti kortą     |")
-    print("| 2 - Neimti kortos  |")
-    print("| 0 - Baigti žaidimą |")
-    print("+--------------------+")
-
-    pasirinkimas = input("Pasirinkite veiksmą: ")
-
-    if pasirinkimas == "1":
-        korta = random.choice(kalade.kalade)
-        # korta = kalade.trauktikorta()
-        zaidejo_suma += korta.reiksmes_verte[korta.reiksme]
-        zaidejo_kortos.append(korta)
-        zaidejokortos(zaidejo_kortos)
-        # print(f"Nauja korta: {korta.reiksme}{korta.simbolis}")
-        print(f"Tavo nauja suma: {zaidejo_suma}\n")
-
-    elif pasirinkimas == "2":
-        print("Pasirinkote neimti kortos.")
-        print(f"Tavo dabartinė suma: {zaidejo_suma}")
-
-    elif pasirinkimas == "0":
-        break
-
-    else:
-        print("Neteisingas pasirinkimas!")
-
-print("Žaidimo pabaiga")
-
-print("Dylerio kortos:")
-for korta in dylerio_kortos:
-    dylerio_suma += korta.reiksmes_verte[korta.reiksme]
-    print(f"{korta.reiksme}{korta.simbolis}")
-
-print(f"Dylerio suma: {dylerio_suma}\n")
-
-print("Tavo kortos:")
-for korta in zaidejo_kortos:
-    print(f"{korta.reiksme}{korta.simbolis}")
-
-print(f"Tavo suma: {zaidejo_suma}\n")
+pasirinkimas(zaidejo_tasku_suma, zaidejo_kortos)
